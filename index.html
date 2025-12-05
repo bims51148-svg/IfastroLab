@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IF AstroLab – Ilmu Falak</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      padding-top: 20px;
+      font-size: 28px;
+    }
+
+    .menu {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 10px;
+    }
+
+    .menu button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background: #1e40af;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      flex: 1 1 45%;
+      min-width: 140px;
+      max-width: 200px;
+      transition: background 0.3s;
+    }
+
+    .menu button:hover {
+      background: #1d4ed8;
+    }
+
+    #content {
+      margin-top: 30px;
+      min-height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0 10px;
+    }
+
+    canvas {
+      background: black;
+      border: 1px solid white;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+    }
+
+    .moon-img {
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      background-size: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      opacity: 0.5;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      .menu button {
+        flex: 1 1 90%;
+        font-size: 18px;
+        padding: 14px 0;
+      }
+
+      canvas {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🔭 IF AstroLab – Project Ilmu Falak</h1>
+
+  <div class="menu">
+    <button onclick="showSolar()">🪐 Simulasi Tata Surya</button>
+    <button onclick="showMoon()">🌙 Fase Bulan</button>
+    <button onclick="showQibla()">🧭 Arah Kiblat</button>
+    <button onclick="showSun()">☀️ Posisi Matahari</button>
+    <button onclick="showCalendar()">📅 Kalender Astronomi</button>
+  </div>
+
+  <div id="content">
+    <canvas id="solar" width="500" height="500"></canvas>
+  </div>
+
+  <div class="watermark">© Ahmad Bimbim – IF AstroLab</div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
