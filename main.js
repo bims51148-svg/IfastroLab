@@ -1,6 +1,3 @@
-// ==========================================
-// 1. SIMULASI TATA SURYA RESPONSIF
-// ==========================================
 let angle = 0;
 
 function drawSolarSystem() {
@@ -8,7 +5,6 @@ function drawSolarSystem() {
   if (!c) return;
   const ctx = c.getContext("2d");
 
-  // Sesuaikan ukuran canvas dengan lebar layar (maks 500px)
   const size = Math.min(window.innerWidth * 0.9, 500);
   c.width = size;
   c.height = size;
@@ -19,13 +15,11 @@ function drawSolarSystem() {
 
   ctx.clearRect(0, 0, c.width, c.height);
 
-  // Matahari
   ctx.beginPath();
   ctx.arc(center, center, sunRadius, 0, Math.PI * 2);
   ctx.fillStyle = "yellow";
   ctx.fill();
 
-  // Orbit Bumi
   ctx.beginPath();
   ctx.arc(center, center, orbitRadius, 0, Math.PI * 2);
   ctx.strokeStyle = "white";
@@ -43,11 +37,15 @@ function drawSolarSystem() {
   requestAnimationFrame(drawSolarSystem);
 }
 
-drawSolarSystem();
+window.showSolar = function () {
+  document.getElementById("content").innerHTML = `
+    <h2>🪐 Simulasi Tata Surya</h2>
+    <p>Simulasi orbit sederhana untuk memahami gerak Bumi mengelilingi Matahari.</p>
+    <canvas id="solar"></canvas>
+  `;
+  drawSolarSystem();
+};
 
-// ==========================================
-// 2. FASE BULAN
-// ==========================================
 function getMoonPhaseText() {
   const phases = [
     "🌑 Bulan Baru",
@@ -61,18 +59,6 @@ function getMoonPhaseText() {
   ];
   return phases[Math.floor(Math.random() * phases.length)];
 }
-
-// ==========================================
-// 3. FITUR — HALAMAN DINAMIS
-// ==========================================
-window.showSolar = function () {
-  document.getElementById("content").innerHTML = `
-    <h2>🪐 Simulasi Tata Surya</h2>
-    <p>Simulasi orbit sederhana untuk memahami gerak Bumi mengelilingi Matahari.</p>
-    <canvas id="solar"></canvas>
-  `;
-  drawSolarSystem();
-};
 
 window.showMoon = function () {
   const phase = getMoonPhaseText();
@@ -92,20 +78,15 @@ window.showQibla = function () {
     <p>Menggunakan kompas perangkat untuk menampilkan arah Ka'bah.</p>
     <h3 id="qibla">Memuat arah kiblat...</h3>
   `;
-
   const latKabah = 21.4225;
   const lonKabah = 39.8262;
-
   navigator.geolocation.getCurrentPosition((pos) => {
     const lat = pos.coords.latitude;
     const lon = pos.coords.longitude;
-
     const y = Math.sin(lonKabah - lon);
     const x = Math.cos(lat) * Math.tan(latKabah) - Math.sin(lat) * Math.cos(lonKabah - lon);
-
     let bearing = Math.atan2(y, x) * (180 / Math.PI);
     bearing = (bearing + 360) % 360;
-
     document.getElementById("qibla").textContent =
       `Arah Kiblat dari lokasimu: ${bearing.toFixed(2)}°`;
   });
@@ -117,14 +98,10 @@ window.showSun = function () {
     <p>Menghitung posisi Matahari berdasarkan waktu saat ini.</p>
     <h3 id="sunPos">Mengambil data...</h3>
   `;
-
   const now = new Date();
   const h = now.getHours();
-  const m = now.getMinutes();
-
   const altitude = Math.abs(Math.sin(h / 24 * Math.PI)) * 70;
   const azimuth = (h * 15) % 360;
-
   document.getElementById("sunPos").textContent =
     `Ketinggian: ${altitude.toFixed(2)}° | Arah (Azimuth): ${azimuth.toFixed(2)}°`;
 };
